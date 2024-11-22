@@ -1,38 +1,39 @@
-version: '3.8'
+version: '3.9' # Sử dụng phiên bản 3.9 để hỗ trợ `condition: service_healthy`
 
 services:
   web:
-    image: nguyentandung2004/innolabs_test_oauth2:1.0.0        
+    image: nguyentandung2004/innolabs_test_oauth2:1.0.0
     ports:
-      - "8080:8080"          
+      - "8080:8080"
     depends_on:
-      - db                    
+      db:
+        condition: service_healthy # Đợi cho đến khi MySQL trở thành "healthy"
     environment:
-      - DB_HOST=db            
-      - DB_PORT=3306          
-      - DB_NAME=innolabs_oauth       
-      - DB_USERNAME=root       
-      - DB_PASSWORD=12345     
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_NAME=innolabs_oauth
+      - DB_USERNAME=root
+      - DB_PASSWORD=12345
     networks:
       - innolabs_network
 
   db:
     image: mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=12345 
-      - MYSQL_DATABASE=innolabs_oauth  
+      - MYSQL_ROOT_PASSWORD=12345
+      - MYSQL_DATABASE=innolabs_oauth
     ports:
-      - "3307:3306"    
+      - "3307:3306"
     volumes:
-      - mysql-data:/var/lib/mysql  # Volume để lưu trữ dữ liệu MySQL
-      - ./sql/sql.sql:/docker-entrypoint-initdb.d/sql.sql  # Mount file SQL trực tiếp vào container
+      - mysql-data:/var/lib/mysql
+      - ./sql/sql.sql:/docker-entrypoint-initdb.d/sql.sql
     networks:
       - innolabs_network
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
+      interval: 10s # Khoảng thời gian giữa các lần kiểm tra
+      timeout: 5s   # Thời gian chờ cho một lần kiểm tra
+      retries: 3    # Số lần thử lại trước khi đánh dấu là "unhealthy"
 
 volumes:
   mysql-data:
