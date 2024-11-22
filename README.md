@@ -74,7 +74,7 @@ Follow these steps to set up and run the project on your local machine:
 
 4. **Move to the Project Directory**
     Change to the project directory:
-    `cd Innolabs_Test_Oauth2'
+    `cd Innolabs_Test_Oauth2`
 
 5. **Run Docker Compose**
     Build and start the Docker containers using Docker Compose:
