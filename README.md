@@ -65,21 +65,26 @@ Follow these steps to set up and run the project on your local machine:
     Launch the terminal or command prompt.
 
 2. **Navigate to the Desired Directory**  
-    Move to the directory where you want to clone the project:  
+    Move to the directory where you want to clone the project:
+   ```bash  
    `cd <your-desired-directory>`
 
-3. **Clone the Project**
+4. **Clone the Project**
     Clone the project from GitHub:
+   ```bash
     `git clone https://github.com/NguyenTanDung-2004/Innolabs_Test_Oauth2.git`
 
-4. **Move to the Project Directory**
+6. **Move to the Project Directory**
     Change to the project directory:
+   ```bash
     `cd Innolabs_Test_Oauth2`
 
-5. **Run Docker Compose**
+8. **Run Docker Compose**
     Build and start the Docker containers using Docker Compose:
+   ```bash
     `docker-compose -f DockerCompose.yml up --build`
 
-6. **Access Swagger UI**
+10. **Access Swagger UI**
     After completing step 5, open your browser and navigate to the following link to access the Swagger UI:
+    ```bash
     `http://localhost:8080/Mini_Project1-0.0.1-SNAPSHOT/swagger-ui/index.html#`
